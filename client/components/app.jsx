@@ -35,9 +35,10 @@ class App extends React.Component {
   }
 
   render() {
+    const average = this.getAverageGrade();
     return (
       <>
-        <Header/>
+        <Header average={average}/>
         <GradeTable grades={this.state.grades}/>
       </>
     );
