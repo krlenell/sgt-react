@@ -15,6 +15,7 @@ export default class GradeTable extends React.Component {
             <th scope="col">Name</th>
             <th scope="col">Course</th>
             <th scope="col">Grade</th>
+            <th scope="col">Operations</th>
           </tr>
         </thead>
         <tbody>
