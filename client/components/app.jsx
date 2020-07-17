@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = {
       grades: []
     };
+    this.placeholder = { name: 'Placeholder Jones', grade: '0', course: 'Placeholding' };
   }
 
   componentDidMount() {
@@ -19,6 +20,22 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ grades: data });
+      });
+  }
+
+  addGrade() {
+
+    fetch('http://localhost:3000/api/grades', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.placeholder)
+    })
+      .then(response => response.json())
+      .then(data => {
+        const newData = this.state.grades.concat(data);
+        this.setState({ grades: newData });
       });
   }
 
