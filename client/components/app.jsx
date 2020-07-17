@@ -28,8 +28,14 @@ class App extends React.Component {
 
   getAverageGrade() {
     const grades = this.state.grades;
+    if (!grades.length) {
+      return 0;
+    }
     let sum = 0;
     grades.forEach(entry => { sum += entry.grade; });
+    if (!sum) {
+      return 0;
+    }
     const average = Math.ceil(sum / grades.length);
     return average;
   }
