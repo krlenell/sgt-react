@@ -9,7 +9,7 @@ export default class GradeTable extends React.Component {
     ));
 
     return (
-      <table className="table table-striped">
+      <table className="table table-striped grade-table">
         <thead className="thead-dark">
           <tr>
             <th scope="col">Name</th>
