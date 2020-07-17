@@ -4,13 +4,10 @@ export default class Grade extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      id: this.props.grade.id
-    };
   }
 
   handleClick(event) {
-    const deleteId = this.state.id;
+    const deleteId = this.props.grade.id;
     this.props.onSubmit(deleteId);
   }
 
