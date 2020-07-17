@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.addGrade = this.addGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
     this.state = {
       grades: []
     };
@@ -37,6 +38,27 @@ class App extends React.Component {
         const newData = this.state.grades.concat(data);
         this.setState({ grades: newData });
       });
+  }
+
+  deleteGrade(deleteId) {
+    let grades = this.state.grades.slice();
+    const index = grades.map((grade, index) => {
+      if (grade.id === deleteId) {
+        return index;
+      }
+    });
+    grades = grades.splice(index, 1);
+    fetch(`http://localhost:3000/api/grades/${deleteId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ grades: grades });
+      });
+
   }
 
   getAverageGrade() {
