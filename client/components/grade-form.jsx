@@ -4,7 +4,7 @@ export default class GradeForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className="grade-form">
         <div className="input-group mb-1">
           <div className="input-group-prepend">
             <span className="input-group-text"><i className="fas fa-user"></i></span>

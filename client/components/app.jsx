@@ -59,8 +59,10 @@ class App extends React.Component {
     return (
       <>
         <Header average={average}/>
-        <GradeTable grades={this.state.grades}/>
-        <GradeForm/>
+        <div className="d-flex">
+          <GradeTable grades={this.state.grades}/>
+          <GradeForm/>
+        </div>
       </>
     );
   }
