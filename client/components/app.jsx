@@ -22,10 +22,6 @@ class App extends React.Component {
       });
   }
 
-  componentDidUpdate() {
-    this.getAverageGrade();
-  }
-
   getAverageGrade() {
     const grades = this.state.grades;
     if (!grades.length) {
