@@ -1,34 +1,22 @@
 {
   "grades": [
     {
-      "id": 5,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 12,
-      "name": "Brendan Eich",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
-      "id": 32,
-      "name": "Douglas Crockford",
-      "course": "JavaScript",
-      "grade": 90
-    },
-    {
       "name": "Kevin Lenell",
       "course": "CSS",
       "grade": 34,
       "id": 33
     },
     {
-      "name": "Bill S. Preston Esquire",
-      "course": "History",
-      "grade": 100,
+      "name": "Tayne",
+      "course": "Hat Wobble",
+      "grade": 99,
       "id": 34
+    },
+    {
+      "name": "Celery Man",
+      "course": "4d3d3",
+      "grade": 99,
+      "id": 35
     }
   ]
 }
