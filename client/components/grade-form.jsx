@@ -15,8 +15,17 @@ export default class GradeForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('Form Submitted', event);
-
+    const newGrade = {
+      name: this.state.name,
+      course: this.state.course,
+      grade: parseInt(this.state.grade, 10)
+    };
+    this.props.onSubmit(newGrade);
+    this.setState({
+      name: '',
+      course: '',
+      grade: ''
+    });
   }
 
   handleReset(event) {
@@ -31,10 +40,6 @@ export default class GradeForm extends React.Component {
   handleChange(event) {
     const target = event.target.id;
     this.setState({ [target]: event.target.value });
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
   }
 
   render() {

@@ -6,10 +6,10 @@ import GradeForm from './grade-form';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.addGrade = this.addGrade.bind(this);
     this.state = {
       grades: []
     };
-    this.placeholder = { name: 'Placeholder Jones', grade: '0', course: 'Placeholding' };
   }
 
   componentDidMount() {
@@ -24,14 +24,13 @@ class App extends React.Component {
       });
   }
 
-  addGrade() {
-
+  addGrade(newGrade) {
     fetch('http://localhost:3000/api/grades', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.placeholder)
+      body: JSON.stringify(newGrade)
     })
       .then(response => response.json())
       .then(data => {
@@ -61,7 +60,7 @@ class App extends React.Component {
         <Header average={average}/>
         <div className="d-flex">
           <GradeTable grades={this.state.grades}/>
-          <GradeForm/>
+          <GradeForm onSubmit={this.addGrade}/>
         </div>
       </>
     );
