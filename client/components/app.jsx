@@ -22,6 +22,18 @@ class App extends React.Component {
       });
   }
 
+  componentDidUpdate() {
+    this.getAverageGrade();
+  }
+
+  getAverageGrade() {
+    const grades = this.state.grades;
+    let sum = 0;
+    grades.forEach(entry => { sum += entry.grade; });
+    const average = Math.ceil(sum / grades.length);
+    return average;
+  }
+
   render() {
     return (
       <>
