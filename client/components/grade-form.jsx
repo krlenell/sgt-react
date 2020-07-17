@@ -14,18 +14,18 @@ export default class GradeForm extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('Form Submitted', event);
     event.preventDefault();
+    console.log('Form Submitted', event);
+
   }
 
   handleReset(event) {
-    console.log('reset');
+    event.preventDefault();
     this.setState({
       name: '',
       course: '',
       grade: ''
     });
-    event.preventDefault();
   }
 
   handleChange(event) {
@@ -39,7 +39,7 @@ export default class GradeForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} onReset={this.onReset} className="grade-form">
+      <form onSubmit={this.handleSubmit} onReset={this.handleReset} className="grade-form">
         <div className="input-group mb-1">
           <div className="input-group-prepend">
             <span className="input-group-text"><i className="fas fa-user"></i></span>
