@@ -44,31 +44,60 @@ export default class GradeForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} onReset={this.handleReset} className="grade-form">
+      <form
+        onSubmit={this.handleSubmit}
+        onReset={this.handleReset}
+        className="grade-form">
         <div className="input-group mb-1">
           <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-user"></i></span>
+            <span className="input-group-text">
+              <i className="fas fa-user"></i>
+            </span>
           </div>
-          <input id="name" onChange={this.handleChange} value={this.state.name}
-            type="text" className="form-control" placeholder="Name" />
+          <input
+            id="name"
+            onChange={this.handleChange}
+            value={this.state.name}
+            type="text"
+            className="form-control"
+            placeholder="Name"
+          />
         </div>
         <div className="input-group mb-1">
           <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-list-alt"></i></span>
+            <span className="input-group-text">
+              <i className="fas fa-list-alt"></i>
+            </span>
           </div>
-          <input id="course" onChange={this.handleChange} value={this.state.course}
-            type="text" className="form-control" placeholder="Course" />
+          <input
+            id="course"
+            onChange={this.handleChange}
+            value={this.state.course}
+            type="text"
+            className="form-control"
+            placeholder="Course"
+          />
         </div>
         <div className="input-group mb-1">
           <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-graduation-cap"></i></span>
+            <span className="input-group-text">
+              <i className="fas fa-graduation-cap"></i>
+            </span>
           </div>
-          <input id="grade" onChange={this.handleChange} value={this.state.grade}
-            type="text" className="form-control" placeholder="Grade" />
+          <input
+            id="grade"
+            onChange={this.handleChange}
+            value={this.state.grade}
+            type="text"
+            className="form-control"
+            placeholder="Grade"
+          />
         </div>
         <div className="d-flex justify-content-end">
           <button type="submit" className="btn btn-primary">Add</button>
-          <button type="reset" className="btn ml-1 mr-1 btn-secondary">Reset</button>
+          <button type="reset" className="btn ml-1 mr-1 btn-secondary">
+            Reset
+          </button>
         </div>
       </form>
     );
