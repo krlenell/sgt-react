@@ -13,7 +13,12 @@ export default class GradeTable extends React.Component {
 
   render() {
     const grades = this.props.grades.map(grade => (
-      <Grade onSubmit={this.getDeleteId} key={grade.id} grade={grade}/>
+      <Grade
+        toggleFormEdit={this.props.toggleFormEdit}
+        onSubmit={this.getDeleteId}
+        key={grade.id}
+        grade={grade}
+      />
     ));
 
     return (

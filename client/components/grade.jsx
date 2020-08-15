@@ -13,7 +13,7 @@ export default class Grade extends React.Component {
       this.props.onSubmit(deleteId);
     }
     if (e.currentTarget.id === 'edit') {
-      console.log("I'm gonna edit bro");
+      this.props.toggleFormEdit(this.props.grade);
     }
   }
 

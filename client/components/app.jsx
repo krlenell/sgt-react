@@ -8,8 +8,11 @@ class App extends React.Component {
     super(props);
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.toggleFormEdit = this.toggleFormEdit.bind(this);
     this.state = {
-      grades: []
+      grades: [],
+      editGrade: {},
+      editState: false
     };
   }
 
@@ -75,14 +78,29 @@ class App extends React.Component {
     return average;
   }
 
+  toggleFormEdit(grade) {
+    this.setState({
+      editGrade: grade,
+      editState: true
+    }, () => console.log(this.state));
+  }
+
   render() {
     const average = this.getAverageGrade();
     return (
       <>
         <Header average={average}/>
         <div className="d-flex">
-          <GradeTable grades={this.state.grades} onSubmit={this.deleteGrade}/>
-          <GradeForm onSubmit={this.addGrade}/>
+          <GradeTable
+            toggleFormEdit={this.toggleFormEdit}
+            grades={this.state.grades}
+            onSubmit={this.deleteGrade}
+          />
+          <GradeForm
+            onSubmit={this.addGrade}
+            editGrade={this.state.editGrade}
+            editState={this.state.editState}
+          />
         </div>
       </>
     );
