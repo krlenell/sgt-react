@@ -14,17 +14,18 @@ export default class GradeForm extends React.Component {
     };
   }
 
-  handleSubmit(event) {
-    if (this.state.editState) {
-      this.props.updateGrade(this.props.grade);
-      return;
-    }
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
     const newGrade = {
       name: this.state.name,
       course: this.state.course,
       grade: parseInt(this.state.grade, 10)
     };
+    if (this.state.editState) {
+      newGrade.id = this.props.editGrade;
+      this.props.updateGrade(newGrade);
+      return;
+    }
     this.props.onSubmit(newGrade);
     this.reset();
   }
@@ -38,7 +39,7 @@ export default class GradeForm extends React.Component {
   }
 
   handleReset(e) {
-    event.preventDefault();
+    e.preventDefault();
     if (this.state.editState) {
       this.props.stopEditing();
     } else {
@@ -71,6 +72,7 @@ export default class GradeForm extends React.Component {
   }
 
   render() {
+    console.log('gradeform this.props.grade', this.props.editGrade);
     let buttonsText = { submit: 'Add', reset: 'Reset' };
     if (this.state.editState) {
       buttonsText = { submit: 'Update', reset: 'Cancel' };

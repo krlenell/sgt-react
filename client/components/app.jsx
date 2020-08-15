@@ -50,6 +50,9 @@ class App extends React.Component {
   }
 
   deleteGrade(deleteId) {
+    console.log('deletGrade deleteId', deleteId);
+    console.log('deletGrade deleteId typeof', typeof deleteId);
+
     const grades = this.state.grades.slice();
     let idIndex;
     grades.forEach((grade, index) => {
@@ -85,7 +88,11 @@ class App extends React.Component {
   }
 
   updateGrade(newGrade) {
-    const { id, grade, course, name } = newGrade;
+    console.log(newGrade);
+    let { id, grade, course, name } = newGrade;
+    console.log('updateGrade Id', id);
+    console.log('typeof id', typeof id);
+    id = parseInt(id, 10);
     const gradeObj = {
       grade: grade,
       course: course,
