@@ -6,9 +6,15 @@ export default class Grade extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event) {
-    const deleteId = this.props.grade.id;
-    this.props.onSubmit(deleteId);
+  handleClick(e) {
+    console.log(e.currentTarget.id);
+    if (e.currentTarget.id === 'delete') {
+      const deleteId = this.props.grade.id;
+      this.props.onSubmit(deleteId);
+    }
+    if (e.currentTarget.id === 'edit') {
+      console.log("I'm gonna edit bro");
+    }
   }
 
   render() {

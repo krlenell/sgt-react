@@ -1,22 +1,16 @@
 {
   "grades": [
     {
-      "name": "Kevin Lenell",
-      "course": "CSS",
-      "grade": 34,
-      "id": 33
+      "name": "asdfa",
+      "course": "2131",
+      "grade": null,
+      "id": 1
     },
     {
-      "name": "Tayne",
-      "course": "Hat Wobble",
-      "grade": 99,
-      "id": 34
-    },
-    {
-      "name": "Celery Man",
-      "course": "4d3d3",
-      "grade": 99,
-      "id": 35
+      "name": "222",
+      "course": "33",
+      "grade": 2,
+      "id": 2
     }
   ]
 }

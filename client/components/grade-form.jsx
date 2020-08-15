@@ -9,7 +9,8 @@ export default class GradeForm extends React.Component {
     this.state = {
       name: '',
       course: '',
-      grade: ''
+      grade: '',
+      editing: false
     };
   }
 
@@ -21,6 +22,10 @@ export default class GradeForm extends React.Component {
       grade: parseInt(this.state.grade, 10)
     };
     this.props.onSubmit(newGrade);
+    this.reset();
+  }
+
+  reset() {
     this.setState({
       name: '',
       course: '',
@@ -30,11 +35,7 @@ export default class GradeForm extends React.Component {
 
   handleReset(event) {
     event.preventDefault();
-    this.setState({
-      name: '',
-      course: '',
-      grade: ''
-    });
+    this.reset();
   }
 
   handleChange(event) {
