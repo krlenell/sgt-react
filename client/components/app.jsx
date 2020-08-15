@@ -9,6 +9,7 @@ class App extends React.Component {
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
     this.toggleFormEdit = this.toggleFormEdit.bind(this);
+    this.stopEditing = this.stopEditing.bind(this);
     this.state = {
       grades: [],
       editGrade: {},
@@ -85,6 +86,14 @@ class App extends React.Component {
     }, () => console.log(this.state));
   }
 
+  stopEditing() {
+    console.log('stopediting called');
+    this.setState({
+      editState: false,
+      editGrade: {}
+    });
+  }
+
   render() {
     const average = this.getAverageGrade();
     return (
@@ -98,6 +107,7 @@ class App extends React.Component {
           />
           <GradeForm
             onSubmit={this.addGrade}
+            stopEditing={this.stopEditing}
             editGrade={this.state.editGrade}
             editState={this.state.editState}
           />

@@ -1,16 +1,22 @@
 {
   "grades": [
     {
-      "name": "asdfa",
-      "course": "2131",
-      "grade": null,
-      "id": 1
-    },
-    {
       "name": "222",
       "course": "33",
       "grade": 2,
       "id": 2
+    },
+    {
+      "name": "Kevin Lenell",
+      "course": "CSS",
+      "grade": 12,
+      "id": 3
+    },
+    {
+      "name": "Bep Boebingsly",
+      "course": "23",
+      "grade": 12,
+      "id": 4
     }
   ]
 }

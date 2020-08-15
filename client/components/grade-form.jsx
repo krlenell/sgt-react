@@ -10,11 +10,15 @@ export default class GradeForm extends React.Component {
       name: '',
       course: '',
       grade: '',
-      editing: false
+      editState: false
     };
   }
 
   handleSubmit(event) {
+    if (this.state.editState) {
+      console.log('sending to the app');
+      return;
+    }
     event.preventDefault();
     const newGrade = {
       name: this.state.name,
@@ -33,9 +37,13 @@ export default class GradeForm extends React.Component {
     });
   }
 
-  handleReset(event) {
+  handleReset(e) {
     event.preventDefault();
-    this.reset();
+    if (this.state.editState) {
+      this.props.stopEditing();
+    } else {
+      this.reset();
+    }
   }
 
   handleChange(event) {
@@ -43,7 +51,30 @@ export default class GradeForm extends React.Component {
     this.setState({ [target]: event.target.value });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.editState !== prevProps.editState) {
+      if (this.props.editState === true) {
+        const editGrade = this.props.editGrade;
+        this.setState({
+          name: editGrade.name,
+          course: editGrade.course,
+          grade: editGrade.grade,
+          editState: true
+        });
+      } else {
+        this.setState({
+          editState: false
+        });
+        this.reset();
+      }
+    }
+  }
+
   render() {
+    let buttonsText = { submit: 'Add', reset: 'Reset' };
+    if (this.state.editState) {
+      buttonsText = { submit: 'Update', reset: 'Cancel' };
+    }
     return (
       <form
         onSubmit={this.handleSubmit}
@@ -95,9 +126,11 @@ export default class GradeForm extends React.Component {
           />
         </div>
         <div className="d-flex justify-content-end">
-          <button type="submit" className="btn btn-primary">Add</button>
+          <button type="submit" className="btn btn-primary">
+            {buttonsText.submit}
+          </button>
           <button type="reset" className="btn ml-1 mr-1 btn-secondary">
-            Reset
+            {buttonsText.reset}
           </button>
         </div>
       </form>
