@@ -10,6 +10,7 @@ class App extends React.Component {
     this.deleteGrade = this.deleteGrade.bind(this);
     this.toggleFormEdit = this.toggleFormEdit.bind(this);
     this.stopEditing = this.stopEditing.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
     this.state = {
       grades: [],
       editGrade: {},
@@ -18,6 +19,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.updateGradesList();
+  }
+
+  updateGradesList() {
     fetch('http://localhost:3000/api/grades', {
       headers: {
         'Content-Type': 'application/json'
@@ -79,6 +84,23 @@ class App extends React.Component {
     return average;
   }
 
+  updateGrade(newGrade) {
+    const { id, grade, course, name } = newGrade;
+    const gradeObj = {
+      grade: grade,
+      course: course,
+      name: name
+    };
+    fetch(`http://localhost:3000/api/grades/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newGrade)
+    })
+      .then(response => console.log(response));
+  }
+
   toggleFormEdit(grade) {
     this.setState({
       editGrade: grade,
@@ -106,6 +128,7 @@ class App extends React.Component {
             onSubmit={this.deleteGrade}
           />
           <GradeForm
+            updateGrade={this.updateGrade}
             onSubmit={this.addGrade}
             stopEditing={this.stopEditing}
             editGrade={this.state.editGrade}

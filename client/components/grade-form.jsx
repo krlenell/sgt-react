@@ -16,7 +16,7 @@ export default class GradeForm extends React.Component {
 
   handleSubmit(event) {
     if (this.state.editState) {
-      console.log('sending to the app');
+      this.props.updateGrade(this.props.grade);
       return;
     }
     event.preventDefault();
