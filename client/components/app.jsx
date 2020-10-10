@@ -1,19 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './header';
 import GradeTable from './grade-table';
 import GradeForm from './grade-form';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addGrade = this.addGrade.bind(this);
-    this.deleteGrade = this.deleteGrade.bind(this);
-    this.state = {
-      grades: []
-    };
-  }
+export default function App() {
 
-  componentDidMount() {
+  const [grades, setGrades] = useState();
+
+  useEffect(() => {
     fetch('http://localhost:3000/api/grades', {
       headers: {
         'Content-Type': 'application/json'
@@ -21,11 +15,11 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ grades: data });
+        setGrades(data);
       });
-  }
+  }, []);
 
-  addGrade(newGrade) {
+  function addGrade(newGrade) {
     fetch('http://localhost:3000/api/grades', {
       method: 'POST',
       headers: {
@@ -35,13 +29,12 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        const newData = this.state.grades.concat(data);
-        this.setState({ grades: newData });
+        const newData = grades.concat(data);
+        setGrades(newData);
       });
   }
 
-  deleteGrade(deleteId) {
-    const grades = this.state.grades.slice();
+  function deleteGrade(deleteId) {
     let idIndex;
     grades.forEach((grade, index) => {
       if (grade.id === deleteId) {
@@ -57,12 +50,11 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ grades: grades });
+        setGrades(grades);
       });
   }
 
-  getAverageGrade() {
-    const grades = this.state.grades;
+  function getAverageGrade() {
     if (!grades.length) {
       return 0;
     }
@@ -75,18 +67,16 @@ class App extends React.Component {
     return average;
   }
 
-  render() {
-    const average = this.getAverageGrade();
-    return (
-      <>
-        <Header average={average}/>
-        <div className="d-flex">
-          <GradeTable grades={this.state.grades} onSubmit={this.deleteGrade}/>
-          <GradeForm onSubmit={this.addGrade}/>
-        </div>
-      </>
-    );
+  if (grades === undefined) {
+    return null;
   }
+  return (
+    <>
+      <Header average={getAverageGrade()} />
+      <div className="d-flex">
+        <GradeTable grades={grades} onSubmit={deleteGrade} />
+        <GradeForm onSubmit={addGrade} />
+      </div>
+    </>
+  );
 }
-
-export default App;
