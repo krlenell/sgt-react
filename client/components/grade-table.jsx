@@ -1,14 +1,10 @@
 import React from 'react';
 import Grade from './grade.jsx';
 
-export default function GradeTable({ grades, onSubmit }) {
-
-  function getDeleteId(deleteId) {
-    onSubmit(deleteId);
-  }
+export default function GradeTable({ grades, deleteGrade }) {
 
   const gradeList = grades.map(grade => (
-    <Grade onSubmit={getDeleteId} key={grade.id} grade={grade}/>
+    <Grade deleteGrade={deleteGrade} key={grade.id} grade={grade}/>
   ));
 
   return (

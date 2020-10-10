@@ -1,46 +1,10 @@
 {
   "grades": [
     {
-      "name": "bep",
-      "course": "zulu",
-      "grade": 99,
-      "id": 36
-    },
-    {
       "name": "zulu",
       "course": "mogura",
       "grade": 23,
       "id": 37
-    },
-    {
-      "name": "brandon",
-      "course": "mouse using",
-      "grade": 100,
-      "id": 38
-    },
-    {
-      "name": "brandon",
-      "course": "senior dev",
-      "grade": 10,
-      "id": 39
-    },
-    {
-      "name": "zulue",
-      "course": "ajsdjfsdj",
-      "grade": 23,
-      "id": 40
-    },
-    {
-      "name": "bep",
-      "course": "zulu",
-      "grade": 100,
-      "id": 41
-    },
-    {
-      "name": "bep",
-      "course": "collaborative hook learning",
-      "grade": 23,
-      "id": 42
     }
   ]
 }

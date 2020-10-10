@@ -50,7 +50,7 @@ export default function App() {
     })
       .then(response => response.json())
       .then(data => {
-        setGrades(grades);
+        setGrades(grades.slice());
       });
   }
 
@@ -74,7 +74,7 @@ export default function App() {
     <>
       <Header average={getAverageGrade()} />
       <div className="d-flex">
-        <GradeTable grades={grades} onSubmit={deleteGrade} />
+        <GradeTable grades={grades} deleteGrade={deleteGrade} />
         <GradeForm onSubmit={addGrade} />
       </div>
     </>
