@@ -1,76 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default class GradeForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleReset = this.handleReset.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.state = {
+export default function GradeForm({ onSubmit }) {
+
+  const [formGrade, setFormGrade] = useState({
+    name: '',
+    course: '',
+    grade: ''
+  });
+
+  function handleReset(event) {
+    event.preventDefault();
+    setFormGrade({
       name: '',
       course: '',
       grade: ''
-    };
+    });
   }
 
-  handleSubmit(event) {
+  function handleChange(event) {
+    const target = event.target.id;
+    setFormGrade({ ...formGrade, [target]: event.target.value });
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
     const newGrade = {
-      name: this.state.name,
-      course: this.state.course,
-      grade: parseInt(this.state.grade, 10)
+      name: formGrade.name,
+      course: formGrade.course,
+      grade: parseInt(formGrade.grade, 10)
     };
-    this.props.onSubmit(newGrade);
-    this.setState({
+    onSubmit(newGrade);
+    setFormGrade({
       name: '',
       course: '',
       grade: ''
     });
   }
 
-  handleReset(event) {
-    event.preventDefault();
-    this.setState({
-      name: '',
-      course: '',
-      grade: ''
-    });
-  }
-
-  handleChange(event) {
-    const target = event.target.id;
-    this.setState({ [target]: event.target.value });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit} onReset={this.handleReset} className="grade-form">
-        <div className="input-group mb-1">
-          <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-user"></i></span>
-          </div>
-          <input id="name" onChange={this.handleChange} value={this.state.name}
-            type="text" className="form-control" placeholder="Name" />
+  return (
+    <form onSubmit={handleSubmit} onReset={handleReset} className="grade-form">
+      <div className="input-group mb-1">
+        <div className="input-group-prepend">
+          <span className="input-group-text"><i className="fas fa-user"></i></span>
         </div>
-        <div className="input-group mb-1">
-          <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-list-alt"></i></span>
-          </div>
-          <input id="course" onChange={this.handleChange} value={this.state.course}
-            type="text" className="form-control" placeholder="Course" />
+        <input id="name" onChange={handleChange} value={formGrade.name}
+          type="text" className="form-control" placeholder="Name" />
+      </div>
+      <div className="input-group mb-1">
+        <div className="input-group-prepend">
+          <span className="input-group-text"><i className="fas fa-list-alt"></i></span>
         </div>
-        <div className="input-group mb-1">
-          <div className="input-group-prepend">
-            <span className="input-group-text"><i className="fas fa-graduation-cap"></i></span>
-          </div>
-          <input id="grade" onChange={this.handleChange} value={this.state.grade}
-            type="text" className="form-control" placeholder="Grade" />
+        <input id="course" onChange={handleChange} value={formGrade.course}
+          type="text" className="form-control" placeholder="Course" />
+      </div>
+      <div className="input-group mb-1">
+        <div className="input-group-prepend">
+          <span className="input-group-text"><i className="fas fa-graduation-cap"></i></span>
         </div>
-        <div className="d-flex justify-content-end">
-          <button type="submit" className="btn btn-primary">Add</button>
-          <button type="reset" className="btn ml-1 mr-1 btn-secondary">Reset</button>
-        </div>
-      </form>
-    );
-  }
+        <input id="grade" onChange={handleChange} value={formGrade.grade}
+          type="text" className="form-control" placeholder="Grade" />
+      </div>
+      <div className="d-flex justify-content-end">
+        <button type="submit" className="btn btn-primary">Add</button>
+        <button type="reset" className="btn ml-1 mr-1 btn-secondary">Reset</button>
+      </div>
+    </form>
+  );
 }
