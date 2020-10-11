@@ -9,15 +9,15 @@ export default function Grade({
 
   function handleClick(event) {
     let clicked = event.currentTarget.id;
-    clicked = clicked.split('-')[0]
-    if(clicked === 'delete'){
+    clicked = clicked.split('-')[0];
+    if (clicked === 'delete') {
       const deleteId = grade.id;
       deleteGrade(deleteId);
     }
-    if(clicked === 'edit'){
-      setFormEdit(true)
-      setGradeToEdit(grade)
-      console.log("edit clicked")
+    if (clicked === 'edit') {
+      setFormEdit(true);
+      setGradeToEdit(grade);
+      console.log('edit clicked');
     }
   }
 

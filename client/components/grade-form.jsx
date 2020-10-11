@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-export default function GradeForm({ addGrade, formEdit, setFormEdit }) {
+export default function GradeForm({
+  addGrade,
+  formEdit,
+  setFormEdit,
+  gradeToEdit
+}) {
 
   const [formGrade, setFormGrade] = useState({
     name: '',
@@ -19,6 +24,7 @@ export default function GradeForm({ addGrade, formEdit, setFormEdit }) {
       grade: ''
     });
   }
+
 
   function handleChange(event) {
     const target = event.target.id;

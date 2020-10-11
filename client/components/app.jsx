@@ -7,9 +7,9 @@ export default function App() {
 
   const [grades, setGrades] = useState();
 
-  const [formEdit, setFormEdit] = useState(false)
+  const [formEdit, setFormEdit] = useState(false);
 
-  const [gradeToEdit, setGradeToEdit] = useState({})
+  const [gradeToEdit, setGradeToEdit] = useState({});
 
   useEffect(() => {
     fetch('http://localhost:3000/api/grades', {
@@ -24,12 +24,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("formEdit", formEdit)
-  }, [formEdit])
+    console.log('formEdit', formEdit);
+  }, [formEdit]);
 
   useEffect(() => {
-    console.log("gradeToEdit", gradeToEdit)
-  }, [gradeToEdit])
+    console.log('gradeToEdit', gradeToEdit);
+  }, [gradeToEdit]);
 
   function addGrade(newGrade) {
     fetch('http://localhost:3000/api/grades', {
@@ -66,9 +66,9 @@ export default function App() {
       });
   }
 
-  function updateGrade(updateId, updates){
-    console.log("updateId", updateId)
-    console.table("updates", updates)
+  function updateGrade(updateId, updates) {
+    console.log('updateId', updateId);
+    console.table('updates', updates);
   }
 
   function getAverageGrade() {
@@ -102,6 +102,7 @@ export default function App() {
           updateGrade={updateGrade}
           formEdit={formEdit}
           setFormEdit={setFormEdit}
+          gradeToEdit={gradeToEdit}
         />
       </div>
     </>
