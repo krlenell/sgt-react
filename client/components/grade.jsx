@@ -3,9 +3,15 @@ import React from 'react';
 export default function Grade({ grade, deleteGrade }) {
 
   function handleClick(event) {
-    // const clicked = event.target.id;
-    const deleteId = grade.id;
-    deleteGrade(deleteId);
+    let clicked = event.currentTarget.id;
+    clicked = clicked.split('-')[0]
+    if(clicked === 'delete'){
+      const deleteId = grade.id;
+      deleteGrade(deleteId);
+    }
+    if(clicked === 'edit'){
+      console.log("edit clicked")
+    }
   }
 
   return (
