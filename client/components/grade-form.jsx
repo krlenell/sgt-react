@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; //add useffect
 
 export default function GradeForm({
   addGrade,
@@ -13,7 +13,14 @@ export default function GradeForm({
     grade: ''
   });
 
+  //useEffect ()=>
+  // if formEdit
+  //  setFormGrade  (grade to edit)
+  //else: nothing?
+  //useEffect callback to look for gradeToEdit
+
   function handleReset(event) {
+    //if statement for whether  formedit
     event.preventDefault();
     if(formEdit){
       setFormEdit(false)
@@ -32,6 +39,7 @@ export default function GradeForm({
   }
 
   function handleSubmit(event) {
+    // if to do something else if formedit
     event.preventDefault();
     const newGrade = {
       name: formGrade.name,

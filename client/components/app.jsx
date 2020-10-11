@@ -69,6 +69,11 @@ export default function App() {
   function updateGrade(updateId, updates) {
     console.log('updateId', updateId);
     console.table('updates', updates);
+    //fetch /api/grades/updateId
+    //method PUT
+    // headers: json
+    //then response.json
+    //thensetGrades grades.slice()
   }
 
   function getAverageGrade() {
