@@ -1,9 +1,23 @@
 import React from 'react';
 
-export default function Grade({ grade, onSubmit }) {
+export default function Grade({
+  grade,
+  deleteGrade,
+  setFormEdit,
+  setGradeToEdit
+}) {
+
   function handleClick(event) {
-    const deleteId = grade.id;
-    onSubmit(deleteId);
+    let clicked = event.currentTarget.id;
+    clicked = clicked.split('-')[0];
+    if (clicked === 'delete') {
+      const deleteId = grade.id;
+      deleteGrade(deleteId);
+    }
+    if (clicked === 'edit') {
+      setFormEdit(true);
+      setGradeToEdit(grade);
+    }
   }
 
   return (
@@ -11,9 +25,23 @@ export default function Grade({ grade, onSubmit }) {
       <td>{grade.name}</td>
       <td>{grade.course}</td>
       <td>{grade.grade}</td>
-      <td><button onClick={handleClick} className="btn btn-danger">
-        <i className="fa fa-trash" aria-hidden="true"></i>
-      </button></td>
+      <td>
+        <button
+          onClick={handleClick}
+          id="edit-button"
+          className="btn btn-primary mr-2"
+        >
+          <i className="fas fa-pen-alt"></i>
+        </button>
+        <button
+          onClick={handleClick}
+          id="delete-button"
+          className="btn btn-danger"
+        >
+          <i className="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </td>
+
     </tr>
   );
 }

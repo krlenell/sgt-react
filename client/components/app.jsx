@@ -7,6 +7,10 @@ export default function App() {
 
   const [grades, setGrades] = useState();
 
+  const [formEdit, setFormEdit] = useState(false);
+
+  const [gradeToEdit, setGradeToEdit] = useState({});
+
   useEffect(() => {
     fetch('http://localhost:3000/api/grades', {
       headers: {
@@ -50,7 +54,30 @@ export default function App() {
     })
       .then(response => response.json())
       .then(data => {
-        setGrades(grades);
+        setGrades(grades.slice());
+      });
+  }
+
+  function updateGrade(updatedGrade) {
+    const { id: updateId } = updatedGrade;
+    fetch(`http://localhost:3000/api/grades/${updateId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedGrade)
+    })
+      .then(response => response.json())
+      .then(data => {
+        let idIndex;
+        const gradesCopy = JSON.parse(JSON.stringify(grades));
+        grades.forEach((grade, index) => {
+          if (grade.id === updateId) {
+            idIndex = index;
+          }
+        });
+        gradesCopy.splice(idIndex, 1, data);
+        setGrades(gradesCopy);
       });
   }
 
@@ -74,8 +101,19 @@ export default function App() {
     <>
       <Header average={getAverageGrade()} />
       <div className="d-flex">
-        <GradeTable grades={grades} onSubmit={deleteGrade} />
-        <GradeForm onSubmit={addGrade} />
+        <GradeTable
+          setGradeToEdit={setGradeToEdit}
+          grades={grades}
+          deleteGrade={deleteGrade}
+          setFormEdit={setFormEdit}
+        />
+        <GradeForm
+          addGrade={addGrade}
+          updateGrade={updateGrade}
+          formEdit={formEdit}
+          setFormEdit={setFormEdit}
+          gradeToEdit={gradeToEdit}
+        />
       </div>
     </>
   );

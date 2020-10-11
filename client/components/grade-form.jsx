@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // add useffect
 
-export default function GradeForm({ onSubmit }) {
+export default function GradeForm({
+  addGrade,
+  formEdit,
+  setFormEdit,
+  gradeToEdit,
+  updateGrade
+}) {
 
   const [formGrade, setFormGrade] = useState({
     name: '',
@@ -8,8 +14,21 @@ export default function GradeForm({ onSubmit }) {
     grade: ''
   });
 
+  useEffect(() => {
+    if (formEdit) {
+      setFormGrade({
+        name: gradeToEdit.name,
+        course: gradeToEdit.course,
+        grade: gradeToEdit.grade
+      });
+    }
+  }, [gradeToEdit]);
+
   function handleReset(event) {
     event.preventDefault();
+    if (formEdit) {
+      setFormEdit(false);
+    }
     setFormGrade({
       name: '',
       course: '',
@@ -24,12 +43,21 @@ export default function GradeForm({ onSubmit }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newGrade = {
-      name: formGrade.name,
-      course: formGrade.course,
-      grade: parseInt(formGrade.grade, 10)
-    };
-    onSubmit(newGrade);
+    if (formEdit) {
+      const updatedGrade = { ...gradeToEdit };
+      updatedGrade.name = formGrade.name;
+      updatedGrade.course = formGrade.course;
+      updatedGrade.grade = parseInt(formGrade.grade, 10);
+      updateGrade(updatedGrade);
+      setFormEdit(false);
+    } else {
+      const newGrade = {
+        name: formGrade.name,
+        course: formGrade.course,
+        grade: parseInt(formGrade.grade, 10)
+      };
+      addGrade(newGrade);
+    }
     setFormGrade({
       name: '',
       course: '',
@@ -61,8 +89,12 @@ export default function GradeForm({ onSubmit }) {
           type="text" className="form-control" placeholder="Grade" />
       </div>
       <div className="d-flex justify-content-end">
-        <button type="submit" className="btn btn-primary">Add</button>
-        <button type="reset" className="btn ml-1 mr-1 btn-secondary">Reset</button>
+        <button type="submit" className="btn btn-primary">
+          {formEdit ? 'Update' : 'Add'}
+        </button>
+        <button type="reset" className="btn ml-1 mr-1 btn-secondary">
+          {formEdit ? 'Cancel' : 'Reset'}
+        </button>
       </div>
     </form>
   );
