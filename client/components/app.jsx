@@ -66,9 +66,10 @@ export default function App() {
       });
   }
 
-  function updateGrade(updateId, updates) {
-    console.log('updateId', updateId);
-    console.table('updates', updates);
+  function updateGrade(updatedGrade) {
+    console.table('updates', updatedGrade);
+    const {updateId} = updateGrade
+
     //fetch /api/grades/updateId
     //method PUT
     // headers: json

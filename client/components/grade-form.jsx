@@ -1,10 +1,11 @@
-import React, { useState } from 'react'; //add useffect
+import React, { useState, useEffect } from 'react'; //add useffect
 
 export default function GradeForm({
   addGrade,
   formEdit,
   setFormEdit,
-  gradeToEdit
+  gradeToEdit,
+  updateGrade
 }) {
 
   const [formGrade, setFormGrade] = useState({
@@ -19,8 +20,17 @@ export default function GradeForm({
   //else: nothing?
   //useEffect callback to look for gradeToEdit
 
+  useEffect(() => {
+    if(formEdit){
+      setFormGrade({
+        name: gradeToEdit.name,
+        course: gradeToEdit.course,
+        grade: gradeToEdit.grade
+      })
+    }
+  }, [gradeToEdit])
+
   function handleReset(event) {
-    //if statement for whether  formedit
     event.preventDefault();
     if(formEdit){
       setFormEdit(false)
@@ -39,14 +49,25 @@ export default function GradeForm({
   }
 
   function handleSubmit(event) {
-    // if to do something else if formedit
     event.preventDefault();
-    const newGrade = {
-      name: formGrade.name,
-      course: formGrade.course,
-      grade: parseInt(formGrade.grade, 10)
-    };
-    addGrade(newGrade);
+    if(formEdit){
+      console.log("grade will be updated")
+      const updatedGrade = {...gradeToEdit}
+      updatedGrade.name= formGrade.name
+      updatedGrade.course = formGrade.course
+      updatedGrade.grade = parseInt(formGrade.grade,10)
+      console.log("updatedGrade", updatedGrade)
+      updateGrade(updatedGrade)
+      setFormEdit(false)
+    }
+    else{
+      const newGrade = {
+        name: formGrade.name,
+        course: formGrade.course,
+        grade: parseInt(formGrade.grade, 10)
+      };
+      addGrade(newGrade);
+    }
     setFormGrade({
       name: '',
       course: '',
