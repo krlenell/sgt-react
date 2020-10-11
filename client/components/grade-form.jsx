@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function GradeForm({ onSubmit }) {
+export default function GradeForm({ addGrade, formEdit, setFormEdit }) {
 
   const [formGrade, setFormGrade] = useState({
     name: '',
@@ -10,6 +10,9 @@ export default function GradeForm({ onSubmit }) {
 
   function handleReset(event) {
     event.preventDefault();
+    if(formEdit){
+      setFormEdit(false)
+    }
     setFormGrade({
       name: '',
       course: '',
@@ -29,7 +32,7 @@ export default function GradeForm({ onSubmit }) {
       course: formGrade.course,
       grade: parseInt(formGrade.grade, 10)
     };
-    onSubmit(newGrade);
+    addGrade(newGrade);
     setFormGrade({
       name: '',
       course: '',
@@ -61,8 +64,12 @@ export default function GradeForm({ onSubmit }) {
           type="text" className="form-control" placeholder="Grade" />
       </div>
       <div className="d-flex justify-content-end">
-        <button type="submit" className="btn btn-primary">Add</button>
-        <button type="reset" className="btn ml-1 mr-1 btn-secondary">Reset</button>
+        <button type="submit" className="btn btn-primary">
+          {formEdit ? "Update" : "Add"}
+        </button>
+        <button type="reset" className="btn ml-1 mr-1 btn-secondary">
+          {formEdit ? "Cancel" : "Reset"}
+        </button>
       </div>
     </form>
   );

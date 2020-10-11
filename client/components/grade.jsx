@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Grade({ grade, deleteGrade }) {
+export default function Grade({ grade, deleteGrade, setFormEdit }) {
 
   function handleClick(event) {
     let clicked = event.currentTarget.id;
@@ -10,6 +10,7 @@ export default function Grade({ grade, deleteGrade }) {
       deleteGrade(deleteId);
     }
     if(clicked === 'edit'){
+      setFormEdit(true)
       console.log("edit clicked")
     }
   }

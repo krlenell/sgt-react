@@ -7,6 +7,8 @@ export default function App() {
 
   const [grades, setGrades] = useState();
 
+  const [formEdit, setFormEdit] = useState(false)
+
   useEffect(() => {
     fetch('http://localhost:3000/api/grades', {
       headers: {
@@ -18,6 +20,10 @@ export default function App() {
         setGrades(data);
       });
   }, []);
+
+  useEffect(() => {
+    console.log("formEdit", formEdit)
+  }, [formEdit])
 
   function addGrade(newGrade) {
     fetch('http://localhost:3000/api/grades', {
@@ -54,6 +60,11 @@ export default function App() {
       });
   }
 
+  function updateGrade(updateId, updates){
+    console.log("updateId", updateId)
+    console.table("updates", updates)
+  }
+
   function getAverageGrade() {
     if (!grades.length) {
       return 0;
@@ -74,8 +85,17 @@ export default function App() {
     <>
       <Header average={getAverageGrade()} />
       <div className="d-flex">
-        <GradeTable grades={grades} deleteGrade={deleteGrade} />
-        <GradeForm onSubmit={addGrade} />
+        <GradeTable
+          grades={grades}
+          deleteGrade={deleteGrade}
+          setFormEdit={setFormEdit}
+        />
+        <GradeForm
+          addGrade={addGrade}
+          updateGrade={updateGrade}
+          formEdit={formEdit}
+          setFormEdit={setFormEdit}
+        />
       </div>
     </>
   );

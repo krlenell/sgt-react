@@ -1,10 +1,15 @@
 import React from 'react';
 import Grade from './grade.jsx';
 
-export default function GradeTable({ grades, deleteGrade }) {
+export default function GradeTable({ grades, deleteGrade, setFormEdit }) {
 
   const gradeList = grades.map(grade => (
-    <Grade deleteGrade={deleteGrade} key={grade.id} grade={grade}/>
+    <Grade
+      deleteGrade={deleteGrade}
+      key={grade.id}
+      grade={grade}
+      setFormEdit={setFormEdit}
+    />
   ));
 
   return (
