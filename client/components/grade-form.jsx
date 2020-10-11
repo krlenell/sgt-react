@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; //add useffect
+import React, { useState, useEffect } from 'react'; // add useffect
 
 export default function GradeForm({
   addGrade,
@@ -14,26 +14,20 @@ export default function GradeForm({
     grade: ''
   });
 
-  //useEffect ()=>
-  // if formEdit
-  //  setFormGrade  (grade to edit)
-  //else: nothing?
-  //useEffect callback to look for gradeToEdit
-
   useEffect(() => {
-    if(formEdit){
+    if (formEdit) {
       setFormGrade({
         name: gradeToEdit.name,
         course: gradeToEdit.course,
         grade: gradeToEdit.grade
-      })
+      });
     }
-  }, [gradeToEdit])
+  }, [gradeToEdit]);
 
   function handleReset(event) {
     event.preventDefault();
-    if(formEdit){
-      setFormEdit(false)
+    if (formEdit) {
+      setFormEdit(false);
     }
     setFormGrade({
       name: '',
@@ -42,7 +36,6 @@ export default function GradeForm({
     });
   }
 
-
   function handleChange(event) {
     const target = event.target.id;
     setFormGrade({ ...formGrade, [target]: event.target.value });
@@ -50,17 +43,14 @@ export default function GradeForm({
 
   function handleSubmit(event) {
     event.preventDefault();
-    if(formEdit){
-      console.log("grade will be updated")
-      const updatedGrade = {...gradeToEdit}
-      updatedGrade.name= formGrade.name
-      updatedGrade.course = formGrade.course
-      updatedGrade.grade = parseInt(formGrade.grade,10)
-      console.log("updatedGrade", updatedGrade)
-      updateGrade(updatedGrade)
-      setFormEdit(false)
-    }
-    else{
+    if (formEdit) {
+      const updatedGrade = { ...gradeToEdit };
+      updatedGrade.name = formGrade.name;
+      updatedGrade.course = formGrade.course;
+      updatedGrade.grade = parseInt(formGrade.grade, 10);
+      updateGrade(updatedGrade);
+      setFormEdit(false);
+    } else {
       const newGrade = {
         name: formGrade.name,
         course: formGrade.course,
@@ -100,10 +90,10 @@ export default function GradeForm({
       </div>
       <div className="d-flex justify-content-end">
         <button type="submit" className="btn btn-primary">
-          {formEdit ? "Update" : "Add"}
+          {formEdit ? 'Update' : 'Add'}
         </button>
         <button type="reset" className="btn ml-1 mr-1 btn-secondary">
-          {formEdit ? "Cancel" : "Reset"}
+          {formEdit ? 'Cancel' : 'Reset'}
         </button>
       </div>
     </form>

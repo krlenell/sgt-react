@@ -23,14 +23,6 @@ export default function App() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log('formEdit', formEdit);
-  }, [formEdit]);
-
-  useEffect(() => {
-    console.log('gradeToEdit', gradeToEdit);
-  }, [gradeToEdit]);
-
   function addGrade(newGrade) {
     fetch('http://localhost:3000/api/grades', {
       method: 'POST',
@@ -67,14 +59,26 @@ export default function App() {
   }
 
   function updateGrade(updatedGrade) {
-    console.table('updates', updatedGrade);
-    const {updateId} = updateGrade
-
-    //fetch /api/grades/updateId
-    //method PUT
-    // headers: json
-    //then response.json
-    //thensetGrades grades.slice()
+    const { id: updateId } = updatedGrade;
+    fetch(`http://localhost:3000/api/grades/${updateId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedGrade)
+    })
+      .then(response => response.json())
+      .then(data => {
+        let idIndex;
+        const gradesCopy = JSON.parse(JSON.stringify(grades));
+        grades.forEach((grade, index) => {
+          if (grade.id === updateId) {
+            idIndex = index;
+          }
+        });
+        gradesCopy.splice(idIndex, 1, data);
+        setGrades(gradesCopy);
+      });
   }
 
   function getAverageGrade() {

@@ -2,7 +2,7 @@
   "grades": [
     {
       "name": "zulu",
-      "course": "mogura",
+      "course": "mogurad",
       "grade": 23,
       "id": 37
     },
@@ -11,6 +11,12 @@
       "course": "asdfasdf",
       "grade": 222,
       "id": 38
+    },
+    {
+      "name": "steely",
+      "course": "daniel",
+      "grade": 12,
+      "id": 39
     }
   ]
 }

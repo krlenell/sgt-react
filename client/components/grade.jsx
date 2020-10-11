@@ -17,7 +17,6 @@ export default function Grade({
     if (clicked === 'edit') {
       setFormEdit(true);
       setGradeToEdit(grade);
-      console.log('edit clicked');
     }
   }
 
