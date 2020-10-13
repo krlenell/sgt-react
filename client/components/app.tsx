@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Header from './header';
-import GradeTable from './grade-table';
-import GradeForm from './grade-form';
+import GradeTable from './grade-table'
+import GradeForm from './grade-form'
 
-export default function App() {
+export default function App(): React.ReactElement{
 
-  const [grades, setGrades] = useState();
+  const [grades, setGrades] = useState<Grade[]>([]);
 
   const [formEdit, setFormEdit] = useState(false);
 
-  const [gradeToEdit, setGradeToEdit] = useState({});
+  const [gradeToEdit, setGradeToEdit] = useState<Grade>();
 
   useEffect(() => {
     fetch('http://localhost:3000/api/grades', {
@@ -23,7 +23,7 @@ export default function App() {
       });
   }, []);
 
-  function addGrade(newGrade) {
+  function addGrade(newGrade: Grade) {
     fetch('http://localhost:3000/api/grades', {
       method: 'POST',
       headers: {
@@ -38,14 +38,16 @@ export default function App() {
       });
   }
 
-  function deleteGrade(deleteId) {
+  function deleteGrade(deleteId: number) {
     let idIndex;
     grades.forEach((grade, index) => {
-      if (grade.id === deleteId) {
-        idIndex = index;
+      if(grade.id){
+        if (grade.id === deleteId) {
+          idIndex = index;
+          grades.splice(idIndex, 1);
+        }
       }
     });
-    grades.splice(idIndex, 1);
     fetch(`http://localhost:3000/api/grades/${deleteId}`, {
       method: 'DELETE',
       headers: {
@@ -58,7 +60,7 @@ export default function App() {
       });
   }
 
-  function updateGrade(updatedGrade) {
+  function updateGrade(updatedGrade: Grade) {
     const { id: updateId } = updatedGrade;
     fetch(`http://localhost:3000/api/grades/${updateId}`, {
       method: 'PUT',
@@ -95,7 +97,7 @@ export default function App() {
   }
 
   if (grades === undefined) {
-    return null;
+    return <></>;
   }
   return (
     <>

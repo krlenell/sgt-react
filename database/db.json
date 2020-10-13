@@ -17,6 +17,18 @@
       "course": "daniel",
       "grade": 12,
       "id": 39
+    },
+    {
+      "name": "brandon",
+      "course": "typescript",
+      "grade": 100,
+      "id": 40
+    },
+    {
+      "name": "ancide",
+      "course": "watching",
+      "grade": 100,
+      "id": 41
     }
   ]
 }

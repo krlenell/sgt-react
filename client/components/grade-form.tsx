@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'; // add useffect
+import React, { useState, useEffect, SyntheticEvent, FormEvent, ChangeEventHandler, ChangeEvent } from 'react'; // add useffect
 
-export default function GradeForm({
-  addGrade,
-  formEdit,
-  setFormEdit,
-  gradeToEdit,
-  updateGrade
-}) {
+interface GradeFormProps{
+  addGrade: (newGrade: Grade) => void,
+  formEdit: boolean,
+  setFormEdit: (value: boolean | ((prevVar: boolean) => boolean)) => void,
+  gradeToEdit: Grade | undefined,
+  updateGrade: (updatedGrade: Grade) => void
+}
+
+export default function GradeForm(props: GradeFormProps): React.ReactElement {
 
   const [formGrade, setFormGrade] = useState({
     name: '',
@@ -15,19 +17,19 @@ export default function GradeForm({
   });
 
   useEffect(() => {
-    if (formEdit) {
+    if (props.formEdit && props.gradeToEdit) {
       setFormGrade({
-        name: gradeToEdit.name,
-        course: gradeToEdit.course,
-        grade: gradeToEdit.grade
+        name: props.gradeToEdit.name,
+        course: props.gradeToEdit.course,
+        grade: props.gradeToEdit.grade.toString()
       });
     }
-  }, [gradeToEdit]);
+  }, [props.gradeToEdit]);
 
-  function handleReset(event) {
+  function handleReset(event: SyntheticEvent) {
     event.preventDefault();
-    if (formEdit) {
-      setFormEdit(false);
+    if (props.formEdit) {
+      props.setFormEdit(false);
     }
     setFormGrade({
       name: '',
@@ -36,27 +38,27 @@ export default function GradeForm({
     });
   }
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const target = event.target.id;
     setFormGrade({ ...formGrade, [target]: event.target.value });
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
-    if (formEdit) {
-      const updatedGrade = { ...gradeToEdit };
+    if (props.formEdit && props.gradeToEdit) {
+      const updatedGrade: Grade = { ...props.gradeToEdit };
       updatedGrade.name = formGrade.name;
       updatedGrade.course = formGrade.course;
       updatedGrade.grade = parseInt(formGrade.grade, 10);
-      updateGrade(updatedGrade);
-      setFormEdit(false);
+      props.updateGrade(updatedGrade);
+      props.setFormEdit(false);
     } else {
       const newGrade = {
         name: formGrade.name,
         course: formGrade.course,
         grade: parseInt(formGrade.grade, 10)
       };
-      addGrade(newGrade);
+      props.addGrade(newGrade);
     }
     setFormGrade({
       name: '',
@@ -90,10 +92,10 @@ export default function GradeForm({
       </div>
       <div className="d-flex justify-content-end">
         <button type="submit" className="btn btn-primary">
-          {formEdit ? 'Update' : 'Add'}
+          {props.formEdit ? 'Update' : 'Add'}
         </button>
         <button type="reset" className="btn ml-1 mr-1 btn-secondary">
-          {formEdit ? 'Cancel' : 'Reset'}
+          {props.formEdit ? 'Cancel' : 'Reset'}
         </button>
       </div>
     </form>
